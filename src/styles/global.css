@@ -62,7 +62,7 @@ body::before {
 }
 
 :root[data-theme="light"] .cursor-glow {
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent 70%);
 }
 
 a { color: inherit; }
