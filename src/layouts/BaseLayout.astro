@@ -57,54 +57,49 @@ const {
             </svg>
           </button>
           <div class="starmap" id="starmap-panel" aria-label="Site map">
-            <svg viewBox="0 0 340 180" xmlns="http://www.w3.org/2000/svg">
-              <!-- Lines from portfolio hub to subdomains -->
-              <line x1="170" y1="70" x2="40" y2="30" class="starmap-line" />
-              <line x1="170" y1="70" x2="40" y2="110" class="starmap-line" />
-              <line x1="170" y1="70" x2="300" y2="25" class="starmap-line" />
-              <line x1="170" y1="70" x2="300" y2="70" class="starmap-line" />
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <!-- Lines from portfolio hub to subdomains (top row) -->
+              <line x1="150" y1="80" x2="50" y2="30" class="starmap-line" />
+              <line x1="150" y1="80" x2="150" y2="30" class="starmap-line" />
+              <line x1="150" y1="80" x2="250" y2="30" class="starmap-line" />
 
-              <!-- Lines from portfolio hub to page sections -->
-              <line x1="170" y1="70" x2="120" y2="155" class="starmap-line" />
-              <line x1="170" y1="70" x2="195" y2="155" class="starmap-line" />
-              <line x1="170" y1="70" x2="270" y2="155" class="starmap-line" />
+              <!-- Lines from portfolio hub to sections (bottom row) -->
+              <line x1="150" y1="80" x2="50" y2="140" class="starmap-line" />
+              <line x1="150" y1="80" x2="150" y2="140" class="starmap-line" />
+              <line x1="150" y1="80" x2="250" y2="140" class="starmap-line" />
 
-              <!-- Subdomain dots -->
-              <a href="https://kerehama.nz" target="_blank" rel="noopener">
-                <circle cx="40" cy="30" r="6" class="starmap-dot" />
-                <text x="40" y="18" class="starmap-label">kerehama.nz</text>
+              <!-- Top row: subdomains -->
+              <a href="https://kerehama.nz" target="_blank" rel="noopener noreferrer">
+                <circle cx="50" cy="30" r="6" class="starmap-dot" />
+                <text x="50" y="18" class="starmap-label">kerehama.nz</text>
               </a>
-              <a href="https://lab.kerehama.nz" target="_blank" rel="noopener">
-                <circle cx="40" cy="110" r="6" class="starmap-dot" />
-                <text x="40" y="126" class="starmap-label">lab</text>
+              <a href="https://lab.kerehama.nz" target="_blank" rel="noopener noreferrer">
+                <circle cx="150" cy="30" r="6" class="starmap-dot" />
+                <text x="150" y="18" class="starmap-label">lab</text>
               </a>
-              <a href="https://notes.kerehama.nz" target="_blank" rel="noopener">
-                <circle cx="300" cy="25" r="6" class="starmap-dot" />
-                <text x="300" y="14" class="starmap-label">notes</text>
-              </a>
-              <a href="https://kerehama.nz#connect" target="_blank" rel="noopener">
-                <circle cx="300" cy="70" r="6" class="starmap-dot" />
-                <text x="300" y="60" class="starmap-label">connect</text>
+              <a href="https://notes.kerehama.nz" target="_blank" rel="noopener noreferrer">
+                <circle cx="250" cy="30" r="6" class="starmap-dot" />
+                <text x="250" y="18" class="starmap-label">notes</text>
               </a>
 
-              <!-- Section dots -->
+              <!-- Center: portfolio home -->
+              <a href="#">
+                <circle cx="150" cy="80" r="9" class="starmap-dot starmap-home" />
+                <text x="150" y="68" class="starmap-label starmap-label-home">portfolio</text>
+              </a>
+
+              <!-- Bottom row: page sections -->
               <a href="#websites">
-                <circle cx="120" cy="155" r="5" class="starmap-dot" />
-                <text x="120" y="172" class="starmap-label">websites</text>
+                <circle cx="50" cy="140" r="5" class="starmap-dot" />
+                <text x="50" y="158" class="starmap-label">websites</text>
               </a>
               <a href="#awards">
-                <circle cx="195" cy="155" r="5" class="starmap-dot" />
-                <text x="195" y="172" class="starmap-label">awards</text>
+                <circle cx="150" cy="140" r="5" class="starmap-dot" />
+                <text x="150" y="158" class="starmap-label">awards</text>
               </a>
               <a href="#photos">
-                <circle cx="270" cy="155" r="5" class="starmap-dot" />
-                <text x="270" y="172" class="starmap-label">photos</text>
-              </a>
-
-              <!-- Center dot (portfolio home) -->
-              <a href="#" onclick="event.preventDefault(); window.scrollTo({top:0,behavior:'smooth'})">
-                <circle cx="170" cy="70" r="8" class="starmap-dot starmap-home" />
-                <text x="170" y="58" class="starmap-label starmap-label-home">portfolio</text>
+                <circle cx="250" cy="140" r="5" class="starmap-dot" />
+                <text x="250" y="158" class="starmap-label">photos</text>
               </a>
             </svg>
           </div>

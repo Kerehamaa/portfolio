@@ -623,8 +623,8 @@ nav a.brand {
   position: absolute;
   top: calc(100% + 0.75rem);
   right: 0;
-  width: 380px;
-  height: 220px;
+  width: 340px;
+  height: 200px;
   background: var(--bg-soft);
   border: 1px solid var(--card-border);
   border-radius: 1rem;
