@@ -27,6 +27,9 @@ const photos = [
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Jaiden',
     locked: true,
+    location: 'Tauranga Domain',
+    lat: -37.6878,
+    lng: 176.1651,
   },
   {
     file: '/photos/ATH26-2.JPG',
@@ -34,6 +37,9 @@ const photos = [
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Stich',
     locked: true,
+    location: 'Tauranga Domain',
+    lat: -37.6878,
+    lng: 176.1651,
   },
   {
     file: '/photos/ATH26-3.JPG',
@@ -41,6 +47,9 @@ const photos = [
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Julia',
     locked: true,
+    location: 'Tauranga Domain',
+    lat: -37.6878,
+    lng: 176.1651,
   },
   {
     file: '/photos/BBALL25-1.JPG',
@@ -48,6 +57,9 @@ const photos = [
     event: 'Basketball 2025',
     caption: 'cameo ft. Mason',
     locked: true,
+    location: 'Mercury Baypark',
+    lat: -37.7136,
+    lng: 176.1778,
   },
   {
     file: '/photos/MIS25-1.JPG',
@@ -55,6 +67,9 @@ const photos = [
     event: 'Missions Trip 2025',
     caption: 'on the east coast of New Zealand North Island',
     locked: false,
+    location: 'East Coast, NZ',
+    lat: -37.95,
+    lng: 177.30,
   },
   {
     file: '/photos/MIS25-2.JPG',
@@ -62,6 +77,9 @@ const photos = [
     event: 'Missions Trip 2025',
     caption: 'up Mount Hikurangi in Gisborne',
     locked: false,
+    location: 'Mount Hikurangi',
+    lat: -38.1833,
+    lng: 178.0667,
   },
   {
     file: '/photos/MIS25-3.JPG',
@@ -69,6 +87,9 @@ const photos = [
     event: 'Missions Trip 2025',
     caption: 'taken on the east coast of New Zealand North Island',
     locked: false,
+    location: 'East Coast, NZ',
+    lat: -37.85,
+    lng: 177.15,
   },
 ];
 ---
@@ -130,6 +151,11 @@ const photos = [
       <p class="label">Photos</p>
       <h2>Through the lens</h2>
     </header>
+    <!-- Photo map -->
+    <div class="photo-map-container">
+      <div id="photo-map"></div>
+    </div>
+
     <!-- PIN unlock bar -->
     <div class="pin-bar" id="pin-bar">
       <span class="pin-label">🔒 Some photos are private</span>
@@ -264,6 +290,71 @@ const photos = [
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
+
+  <script define:vars={{ photos: photos.map(p => ({ file: p.file, event: p.event, caption: p.caption, date: p.date, location: p.location, lat: p.lat, lng: p.lng, locked: p.locked })) }}>
+    // Photo map
+    document.addEventListener('DOMContentLoaded', () => {
+      const mapEl = document.getElementById('photo-map');
+      if (!mapEl || typeof L === 'undefined') return;
+
+      const map = L.map('photo-map', {
+        scrollWheelZoom: false,
+        attributionControl: true,
+      }).setView([-37.9, 177.0], 8);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap · CartoDB',
+        maxZoom: 18,
+      }).addTo(map);
+
+      // Group photos by location to avoid stacking markers
+      const locations = {};
+      photos.forEach((p, i) => {
+        const key = `${p.lat},${p.lng}`;
+        if (!locations[key]) locations[key] = { lat: p.lat, lng: p.lng, photos: [] };
+        locations[key].photos.push({ ...p, index: i });
+      });
+
+      // Custom marker style
+      const markerIcon = L.divIcon({
+        className: 'map-marker',
+        html: '<div class="map-marker-dot"></div>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+      });
+
+      Object.values(locations).forEach((loc) => {
+        const marker = L.marker([loc.lat, loc.lng], { icon: markerIcon }).addTo(map);
+
+        // Build popup content
+        const photoList = loc.photos.map(p => {
+          const isLocked = p.locked && sessionStorage.getItem('photos_unlocked') !== 'true';
+          const thumb = isLocked
+            ? `<div style="width:60px;height:45px;border-radius:4px;background:rgba(255,255,255,0.1);display:grid;place-items:center;font-size:16px;">🔒</div>`
+            : `<img src="${p.file}" style="width:60px;height:45px;object-fit:cover;border-radius:4px;" />`;
+          return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
+            ${thumb}
+            <div>
+              <div style="font-weight:600;font-size:12px;">${p.event}</div>
+              <div style="font-size:11px;opacity:0.7;">${p.caption}</div>
+            </div>
+          </div>`;
+        }).join('');
+
+        const popupContent = `
+          <div style="font-family:'Space Grotesk',system-ui,sans-serif;color:#fff;min-width:200px;">
+            <div style="font-weight:600;margin-bottom:8px;font-size:13px;color:#06b6d4;">📍 ${loc.photos[0].location}</div>
+            ${photoList}
+          </div>
+        `;
+
+        marker.bindPopup(popupContent, {
+          className: 'dark-popup',
+          maxWidth: 300,
+        });
+      });
     });
   </script>
 
