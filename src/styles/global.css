@@ -576,9 +576,20 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem clamp(1.5rem, 4vw, 3rem) 0;
+  padding: 1rem clamp(1.5rem, 4vw, 3rem);
   font-size: 0.9rem;
   color: var(--muted);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(13, 14, 16, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+:root[data-theme="light"] nav {
+  background: rgba(255, 255, 255, 0.85);
 }
 
 nav a.brand {
