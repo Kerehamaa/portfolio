@@ -304,10 +304,30 @@ const photos = [
         attributionControl: true,
       }).setView([-37.9, 177.0], 8);
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap · CartoDB',
         maxZoom: 18,
-      }).addTo(map);
+      });
+      const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap · CartoDB',
+        maxZoom: 18,
+      });
+
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      (isDark ? darkTiles : lightTiles).addTo(map);
+
+      // Watch for theme changes
+      const observer = new MutationObserver(() => {
+        const isNowDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        if (isNowDark) {
+          map.removeLayer(lightTiles);
+          darkTiles.addTo(map);
+        } else {
+          map.removeLayer(darkTiles);
+          lightTiles.addTo(map);
+        }
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
       // Group photos by location to avoid stacking markers
       const locations = {};

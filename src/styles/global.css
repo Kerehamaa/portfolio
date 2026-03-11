@@ -752,6 +752,19 @@ nav a.brand {
 :root[data-theme="light"] .starmap-label { fill: var(--muted); }
 :root[data-theme="light"] .starmap-label-home { fill: var(--fg); }
 :root[data-theme="light"] .starmap a:hover .starmap-label { fill: var(--fg); }
+:root[data-theme="light"] .dark-popup .leaflet-popup-content-wrapper {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+:root[data-theme="light"] .dark-popup .leaflet-popup-tip {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+:root[data-theme="light"] .dark-popup .leaflet-popup-close-button { color: rgba(0, 0, 0, 0.4); }
+:root[data-theme="light"] .dark-popup .leaflet-popup-close-button:hover { color: #1a1a1a; }
+
 :root[data-theme="light"] .button { border-color: rgba(26, 26, 26, 0.2); }
 :root[data-theme="light"] .button:hover { border-color: var(--accent); }
 :root[data-theme="light"] .button.secondary { border-color: rgba(26, 26, 26, 0.3); color: var(--fg); }
