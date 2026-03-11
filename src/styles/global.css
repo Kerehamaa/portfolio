@@ -617,6 +617,7 @@ nav a.brand {
 }
 
 .starmap-toggle:hover { background: var(--accent-soft); color: var(--fg); }
+.starmap-toggle svg { pointer-events: none; }
 
 .starmap {
   position: absolute;
