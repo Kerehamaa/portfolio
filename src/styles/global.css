@@ -669,7 +669,7 @@ nav a.brand {
 /* ===== THEME TOGGLE ===== */
 .theme-toggle {
   background: transparent;
-  border: 1px solid var(--card-border);
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   padding: 0.5rem;
@@ -683,7 +683,7 @@ nav a.brand {
   overflow: hidden;
 }
 
-.theme-toggle:hover { border-color: var(--accent); background: var(--accent-soft); }
+.theme-toggle:hover { background: var(--accent-soft); }
 
 .theme-icon { position: relative; width: 20px; height: 20px; }
 
