@@ -607,12 +607,13 @@ nav a.brand {
   padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s ease, color 0.2s ease;
+  font-size: 1.1rem;
 }
 
 .starmap-toggle:hover { background: var(--accent-soft); color: var(--fg); }
@@ -621,8 +622,8 @@ nav a.brand {
   position: absolute;
   top: calc(100% + 0.75rem);
   right: 0;
-  width: 320px;
-  height: 160px;
+  width: 380px;
+  height: 220px;
   background: var(--bg-soft);
   border: 1px solid var(--card-border);
   border-radius: 1rem;
