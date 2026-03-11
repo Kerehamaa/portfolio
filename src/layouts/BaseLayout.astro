@@ -163,24 +163,13 @@ const {
     <script>
       // Cursor glow follow
       const glow = document.getElementById('cursor-glow');
-      let mouseX = 0, mouseY = 0;
-      let glowX = 0, glowY = 0;
 
       document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function animateGlow() {
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
         if (glow) {
-          glow.style.left = glowX + 'px';
-          glow.style.top = glowY + 'px';
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
         }
-        requestAnimationFrame(animateGlow);
-      }
-      animateGlow();
+      });
 
       // Hide on touch devices
       if ('ontouchstart' in window) {
