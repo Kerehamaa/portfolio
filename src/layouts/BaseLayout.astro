@@ -26,6 +26,7 @@ const {
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
   </head>
   <body>
+    <div class="cursor-glow" id="cursor-glow"></div>
     <nav>
       <a href="https://kerehama.nz" class="brand">kerehama.nz</a>
       <div class="nav-controls">
@@ -158,6 +159,34 @@ const {
     <footer>
       Built and updated by Miles · Powered by Astro · {new Date().getFullYear()}
     </footer>
+
+    <script>
+      // Cursor glow follow
+      const glow = document.getElementById('cursor-glow');
+      let mouseX = 0, mouseY = 0;
+      let glowX = 0, glowY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateGlow() {
+        glowX += (mouseX - glowX) * 0.08;
+        glowY += (mouseY - glowY) * 0.08;
+        if (glow) {
+          glow.style.left = glowX + 'px';
+          glow.style.top = glowY + 'px';
+        }
+        requestAnimationFrame(animateGlow);
+      }
+      animateGlow();
+
+      // Hide on touch devices
+      if ('ontouchstart' in window) {
+        if (glow) glow.style.display = 'none';
+      }
+    </script>
 
     <script>
       const themeToggle = document.getElementById('theme-toggle');
