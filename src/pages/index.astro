@@ -26,42 +26,49 @@ const photos = [
     date: '20 February 2026',
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Jaiden',
+    locked: true,
   },
   {
     file: '/photos/ATH26-2.JPG',
     date: '20 February 2026',
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Stich',
+    locked: true,
   },
   {
     file: '/photos/ATH26-3.JPG',
     date: '20 February 2026',
     event: 'Athletics Day 2026',
     caption: 'cameo ft. Julia',
+    locked: true,
   },
   {
     file: '/photos/BBALL25-1.JPG',
     date: '14 May 2025',
     event: 'Basketball 2025',
     caption: 'cameo ft. Mason',
+    locked: true,
   },
   {
     file: '/photos/MIS25-1.JPG',
     date: '7 June 2025',
     event: 'Missions Trip 2025',
     caption: 'on the east coast of New Zealand North Island',
+    locked: false,
   },
   {
     file: '/photos/MIS25-2.JPG',
     date: '7 June 2025',
     event: 'Missions Trip 2025',
     caption: 'up Mount Hikurangi in Gisborne',
+    locked: false,
   },
   {
     file: '/photos/MIS25-3.JPG',
     date: '7 June 2025',
     event: 'Missions Trip 2025',
     caption: 'taken on the east coast of New Zealand North Island',
+    locked: false,
   },
 ];
 ---
@@ -123,15 +130,31 @@ const photos = [
       <p class="label">Photos</p>
       <h2>Through the lens</h2>
     </header>
+    <!-- PIN unlock bar -->
+    <div class="pin-bar" id="pin-bar">
+      <span class="pin-label">🔒 Some photos are private</span>
+      <div class="pin-input-row">
+        <input type="password" id="pin-input" maxlength="4" placeholder="Enter PIN" inputmode="numeric" pattern="[0-9]*" autocomplete="off" />
+        <button class="button secondary pin-btn" id="pin-submit">Unlock</button>
+      </div>
+      <span class="pin-error" id="pin-error"></span>
+    </div>
+
     <div class="gallery">
       {photos.map((photo, i) => (
-        <div class="gallery-item" data-index={i}>
+        <div class={`gallery-item ${photo.locked ? 'locked' : ''}`} data-index={i} data-locked={photo.locked ? 'true' : 'false'}>
           <img src={photo.file} alt={`${photo.event} — ${photo.caption}`} loading="lazy" />
           <div class="overlay">
             <span class="photo-title">{photo.event}</span>
             <span class="photo-caption">{photo.caption}</span>
             <span class="photo-date">{photo.date}</span>
           </div>
+          {photo.locked && (
+            <div class="lock-overlay">
+              <span class="lock-icon">🔒</span>
+              <span class="lock-text">PIN required</span>
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -151,11 +174,48 @@ const photos = [
   </div>
 
   <script define:vars={{ photos }}>
+    const PIN = '1234';
+    let unlocked = sessionStorage.getItem('photos_unlocked') === 'true';
+
     const lightbox = document.getElementById('lightbox');
     const lbImg = lightbox.querySelector('img');
     const lbTitle = lightbox.querySelector('.lightbox-info .photo-title');
     const lbCaption = lightbox.querySelector('.lightbox-info .photo-caption');
+    const pinBar = document.getElementById('pin-bar');
+    const pinInput = document.getElementById('pin-input');
+    const pinSubmit = document.getElementById('pin-submit');
+    const pinError = document.getElementById('pin-error');
     let currentIndex = 0;
+
+    function applyUnlockState() {
+      if (unlocked) {
+        document.querySelectorAll('.gallery-item.locked').forEach(el => {
+          el.classList.remove('locked');
+        });
+        pinBar.classList.add('hidden');
+      }
+    }
+
+    // Apply on load (in case already unlocked this session)
+    applyUnlockState();
+
+    function tryUnlock() {
+      if (pinInput.value === PIN) {
+        unlocked = true;
+        sessionStorage.setItem('photos_unlocked', 'true');
+        applyUnlockState();
+        pinError.textContent = '';
+      } else {
+        pinError.textContent = 'Wrong PIN';
+        pinInput.value = '';
+        pinInput.focus();
+      }
+    }
+
+    pinSubmit.addEventListener('click', tryUnlock);
+    pinInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') tryUnlock();
+    });
 
     function openLightbox(index) {
       currentIndex = index;
@@ -174,13 +234,20 @@ const photos = [
     }
 
     function navigate(dir) {
-      currentIndex = (currentIndex + dir + photos.length) % photos.length;
-      openLightbox(currentIndex);
+      // Skip locked photos when navigating
+      let next = currentIndex;
+      for (let i = 0; i < photos.length; i++) {
+        next = (next + dir + photos.length) % photos.length;
+        if (!photos[next].locked || unlocked) break;
+      }
+      openLightbox(next);
     }
 
     document.querySelectorAll('.gallery-item').forEach((item) => {
       item.addEventListener('click', () => {
-        openLightbox(parseInt(item.dataset.index));
+        const idx = parseInt(item.dataset.index);
+        if (photos[idx].locked && !unlocked) return; // Don't open locked photos
+        openLightbox(idx);
       });
     });
 

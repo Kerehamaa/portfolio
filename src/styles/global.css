@@ -293,6 +293,107 @@ section header h2 {
   margin-top: 0.15rem;
 }
 
+/* ===== PIN BAR ===== */
+.pin-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+}
+
+.pin-bar.hidden { display: none; }
+
+.pin-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.pin-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pin-input-row input {
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  width: 120px;
+  text-align: center;
+  letter-spacing: 0.3em;
+  transition: border-color 0.2s ease;
+}
+
+.pin-input-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.pin-btn {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.85rem !important;
+}
+
+.pin-error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+/* ===== LOCKED PHOTOS ===== */
+.gallery-item.locked {
+  cursor: default;
+}
+
+.gallery-item.locked img {
+  filter: blur(20px) saturate(0.3);
+  transform: scale(1.1);
+}
+
+.gallery-item.locked:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item.locked:hover {
+  border-color: var(--card-border);
+  transform: none;
+  box-shadow: none;
+}
+
+.gallery-item.locked .overlay { display: none; }
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.lock-icon { font-size: 2rem; }
+
+.lock-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Hide lock overlay when unlocked (class removed from parent) */
+.gallery-item:not(.locked) .lock-overlay { display: none; }
+
 .camera-note {
   font-size: 0.8rem;
   color: var(--muted);
