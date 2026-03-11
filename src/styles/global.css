@@ -617,7 +617,7 @@ nav a.brand {
 }
 
 .starmap-toggle:hover { background: var(--accent-soft); color: var(--fg); }
-.starmap-toggle svg { pointer-events: none; }
+.starmap-toggle > svg { pointer-events: none; }
 
 .starmap {
   position: absolute;
@@ -664,6 +664,7 @@ nav a.brand {
 
 .starmap-label-home { font-weight: 600; }
 
+.starmap a { cursor: pointer; }
 .starmap a:hover .starmap-dot { fill: var(--accent); filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6)); }
 .starmap a:hover .starmap-label { fill: var(--fg); }
 .starmap:hover .starmap-line { stroke: rgba(248, 247, 242, 0.25); }
