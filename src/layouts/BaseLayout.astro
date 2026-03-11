@@ -1,0 +1,143 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Portfolio — Kerehama Andrews',
+  description = 'Websites, awards, and photography by Kerehama Andrews.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <a href="https://kerehama.nz" class="brand">kerehama.nz</a>
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <div class="theme-icon">
+            <div class="sun-icon">
+              <div class="sun-center"></div>
+              <div class="sun-rays">
+                <div class="ray" style="--i: 0"></div>
+                <div class="ray" style="--i: 1"></div>
+                <div class="ray" style="--i: 2"></div>
+                <div class="ray" style="--i: 3"></div>
+                <div class="ray" style="--i: 4"></div>
+                <div class="ray" style="--i: 5"></div>
+                <div class="ray" style="--i: 6"></div>
+                <div class="ray" style="--i: 7"></div>
+              </div>
+            </div>
+            <div class="moon-icon">
+              <div class="moon-shape"></div>
+            </div>
+          </div>
+        </button>
+        <div class="starmap-wrapper">
+          <button class="starmap-toggle" aria-expanded="false" aria-controls="starmap-panel">Map</button>
+          <div class="starmap" id="starmap-panel" aria-label="Site map">
+            <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
+              <line x1="130" y1="60" x2="40" y2="28" class="starmap-line" />
+              <line x1="130" y1="60" x2="50" y2="95" class="starmap-line" />
+              <line x1="130" y1="60" x2="220" y2="25" class="starmap-line" />
+              <line x1="130" y1="60" x2="215" y2="92" class="starmap-line" />
+
+              <a href="https://portfolio.kerehama.nz">
+                <circle cx="40" cy="28" r="6" class="starmap-dot starmap-home" />
+                <text x="40" y="16" class="starmap-label starmap-label-home">portfolio</text>
+              </a>
+              <a href="https://lab.kerehama.nz" target="_blank" rel="noopener">
+                <circle cx="50" cy="95" r="6" class="starmap-dot" />
+                <text x="50" y="112" class="starmap-label">lab</text>
+              </a>
+              <a href="https://notes.kerehama.nz" target="_blank" rel="noopener">
+                <circle cx="220" cy="25" r="6" class="starmap-dot" />
+                <text x="220" y="14" class="starmap-label">notes</text>
+              </a>
+              <a href="https://kerehama.nz#connect" target="_blank" rel="noopener">
+                <circle cx="215" cy="92" r="6" class="starmap-dot" />
+                <text x="215" y="108" class="starmap-label">connect</text>
+              </a>
+
+              <a href="https://kerehama.nz">
+                <circle cx="130" cy="60" r="8" class="starmap-dot" />
+                <text x="130" y="48" class="starmap-label">kerehama.nz</text>
+              </a>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      const btn = document.querySelector('.starmap-toggle');
+      const panel = document.getElementById('starmap-panel');
+      btn?.addEventListener('click', () => {
+        const open = panel!.classList.toggle('open');
+        btn!.setAttribute('aria-expanded', String(open));
+        btn!.textContent = open ? '✕' : 'Map';
+      });
+      document.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('.starmap-wrapper')) {
+          panel?.classList.remove('open');
+          btn?.setAttribute('aria-expanded', 'false');
+          if (btn) btn.textContent = 'Map';
+        }
+      });
+    </script>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      Built and updated by Miles · Powered by Astro · {new Date().getFullYear()}
+    </footer>
+
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      root.setAttribute('data-theme', savedTheme);
+
+      themeToggle?.addEventListener('click', () => {
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.body.classList.add('theme-transitioning');
+
+        if (newTheme === 'light') {
+          themeToggle.classList.add('contracting');
+          setTimeout(() => { root.setAttribute('data-theme', newTheme); }, 100);
+          setTimeout(() => {
+            themeToggle.classList.remove('contracting');
+            setTimeout(() => { document.body.classList.remove('theme-transitioning'); }, 500);
+          }, 600);
+        } else {
+          themeToggle.classList.add('expanding');
+          setTimeout(() => {
+            root.setAttribute('data-theme', newTheme);
+            setTimeout(() => {
+              themeToggle.classList.remove('expanding');
+              setTimeout(() => { document.body.classList.remove('theme-transitioning'); }, 500);
+            }, 500);
+          }, 200);
+        }
+        localStorage.setItem('theme', newTheme);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const websites = [
+  {
+    label: 'Basketball',
+    title: 'temaruomauao.basketball',
+    body: 'Website for Te Maru o Mauao Basketball — built and maintained by Kerehama.',
+    href: 'https://temaruomauao.basketball',
+  },
+];
+
+const awards = [
+  {
+    title: 'SVA Service Award',
+    org: 'Student Volunteer Army · Bethlehem College',
+    period: 'Aug 2024 – Jun 2025',
+    description: 'Recognised for sustained commitment to volunteering through the generous contribution of time and effort, freely given without expectation of reward, in service to others and the wider community.',
+    tags: ['Volunteering', 'Community Service'],
+  },
+];
+
+const photos = [
+  {
+    file: '/photos/ATH26-1.JPG',
+    date: '20 February 2026',
+    event: 'Athletics Day 2026',
+    caption: 'cameo ft. Jaiden',
+  },
+  {
+    file: '/photos/ATH26-2.JPG',
+    date: '20 February 2026',
+    event: 'Athletics Day 2026',
+    caption: 'cameo ft. Stich',
+  },
+  {
+    file: '/photos/ATH26-3.JPG',
+    date: '20 February 2026',
+    event: 'Athletics Day 2026',
+    caption: 'cameo ft. Julia',
+  },
+  {
+    file: '/photos/BBALL25-1.JPG',
+    date: '14 May 2025',
+    event: 'Basketball 2025',
+    caption: 'cameo ft. Mason',
+  },
+  {
+    file: '/photos/MIS25-1.JPG',
+    date: '7 June 2025',
+    event: 'Missions Trip 2025',
+    caption: 'on the east coast of New Zealand North Island',
+  },
+  {
+    file: '/photos/MIS25-2.JPG',
+    date: '7 June 2025',
+    event: 'Missions Trip 2025',
+    caption: 'up Mount Hikurangi in Gisborne',
+  },
+  {
+    file: '/photos/MIS25-3.JPG',
+    date: '7 June 2025',
+    event: 'Missions Trip 2025',
+    caption: 'taken on the east coast of New Zealand North Island',
+  },
+];
+---
+
+<BaseLayout title="Portfolio — Kerehama Andrews" description="Websites, awards, and photography by Kerehama Andrews.">
+
+  <section class="hero">
+    <div class="hero-mark">
+      <div class="monogram">
+        <span>K</span><span>A</span>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">Kerehama Andrews</p>
+      <h1>Portfolio</h1>
+    </div>
+    <div class="cta-row">
+      <a class="button secondary" href="#websites">Websites</a>
+      <a class="button secondary" href="#awards">Awards</a>
+      <a class="button secondary" href="#photos">Photos</a>
+    </div>
+  </section>
+
+  <section id="websites">
+    <header>
+      <p class="label">Websites</p>
+      <h2>Things I've built</h2>
+    </header>
+    <div class="card-grid two">
+      {websites.map((site) => (
+        <a class="card" href={site.href} target="_blank" rel="noopener noreferrer">
+          <span class="label">{site.label}</span>
+          <h3>{site.title}</h3>
+          <p>{site.body}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="awards">
+    <header>
+      <p class="label">Awards</p>
+      <h2>Recognition &amp; achievements</h2>
+    </header>
+    <div class="card-grid">
+      {awards.map((award) => (
+        <div class="card">
+          <h3>{award.title}</h3>
+          <span class="label">{award.org}</span>
+          <p>{award.description}</p>
+          <div class="award-meta">
+            <span class="award-tag">{award.period}</span>
+            {award.tags.map((tag) => (
+              <span class="award-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="photos">
+    <header>
+      <p class="label">Photos</p>
+      <h2>Through the lens</h2>
+    </header>
+    <div class="gallery">
+      {photos.map((photo, i) => (
+        <div class="gallery-item" data-index={i}>
+          <img src={photo.file} alt={`${photo.event} — ${photo.caption}`} loading="lazy" />
+          <div class="overlay">
+            <span class="photo-title">{photo.event}</span>
+            <span class="photo-caption">{photo.caption}</span>
+            <span class="photo-date">{photo.date}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="camera-note">All images shot on Canon EOS M50 Mark II</p>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">✕</button>
+    <button class="lightbox-nav prev" aria-label="Previous">‹</button>
+    <img src="" alt="" />
+    <button class="lightbox-nav next" aria-label="Next">›</button>
+    <div class="lightbox-info">
+      <div class="photo-title"></div>
+      <div class="photo-caption"></div>
+    </div>
+  </div>
+
+  <script define:vars={{ photos }}>
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = lightbox.querySelector('img');
+    const lbTitle = lightbox.querySelector('.lightbox-info .photo-title');
+    const lbCaption = lightbox.querySelector('.lightbox-info .photo-caption');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const photo = photos[index];
+      lbImg.src = photo.file;
+      lbImg.alt = `${photo.event} — ${photo.caption}`;
+      lbTitle.textContent = photo.event;
+      lbCaption.textContent = `${photo.caption} · ${photo.date}`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      currentIndex = (currentIndex + dir + photos.length) % photos.length;
+      openLightbox(currentIndex);
+    }
+
+    document.querySelectorAll('.gallery-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        openLightbox(parseInt(item.dataset.index));
+      });
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.prev').addEventListener('click', () => navigate(-1));
+    lightbox.querySelector('.next').addEventListener('click', () => navigate(1));
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
+
+</BaseLayout>
