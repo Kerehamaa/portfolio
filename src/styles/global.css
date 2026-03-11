@@ -586,6 +586,9 @@ nav {
   top: 1.5rem;
   right: clamp(1.5rem, 4vw, 3rem);
   z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 nav a.brand {
