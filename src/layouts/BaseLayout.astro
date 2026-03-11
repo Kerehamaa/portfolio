@@ -116,6 +116,12 @@ const {
       const btn = document.querySelector('.starmap-toggle');
       const panel = document.getElementById('starmap-panel');
       const btnIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="6" y1="6" x2="18" y2="6"/><line x1="6" y1="6" x2="12" y2="18"/><line x1="18" y1="6" x2="18" y2="18"/></svg>`;
+      function closePanel() {
+        panel?.classList.remove('open');
+        btn?.setAttribute('aria-expanded', 'false');
+        if (btn) btn.innerHTML = btnIcon;
+      }
+
       btn?.addEventListener('click', (e) => {
         e.stopPropagation();
         const open = panel!.classList.toggle('open');
@@ -127,33 +133,26 @@ const {
       document.addEventListener('click', (e) => {
         const target = e.target as Element;
         if (!target.closest('.starmap-wrapper')) {
-          panel?.classList.remove('open');
-          btn?.setAttribute('aria-expanded', 'false');
-          if (btn) btn.innerHTML = btnIcon;
+          closePanel();
         }
       });
 
-      // Handle clicks on starmap links
-      panel?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const href = link.getAttribute('href');
-          if (!href) return;
+      // Close panel when any link inside is clicked
+      panel?.addEventListener('click', (e) => {
+        const target = e.target as Element;
+        const link = target.closest('a');
+        if (!link) return;
 
-          // Close the panel
-          panel?.classList.remove('open');
-          btn?.setAttribute('aria-expanded', 'false');
-          if (btn) btn.innerHTML = btnIcon;
-
-          // Navigate
-          if (href.startsWith('#')) {
-            e.preventDefault();
-            const el = document.querySelector(href);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            window.open(href, '_blank', 'noopener');
-          }
-        });
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          closePanel();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // External link — just close the panel, let the browser handle navigation
+          closePanel();
+        }
       });
     </script>
 
