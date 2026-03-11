@@ -55,7 +55,7 @@ body::before {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
   filter: blur(40px);
