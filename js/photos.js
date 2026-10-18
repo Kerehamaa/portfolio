@@ -9,8 +9,8 @@ const photos = [
     caption: "cameo ft. Jaiden",
     locked: true,
     location: "Tauranga Domain",
-    lat: -37.6878,
-    lng: 176.1651
+    lat: -37.6784,
+    lng: 176.1656
   },
   {
     file: "/photos/ATH26-2.JPG",
@@ -19,8 +19,8 @@ const photos = [
     caption: "cameo ft. Stich",
     locked: true,
     location: "Tauranga Domain",
-    lat: -37.6878,
-    lng: 176.1651
+    lat: -37.6784,
+    lng: 176.1656
   },
   {
     file: "/photos/ATH26-3.JPG",
@@ -29,8 +29,8 @@ const photos = [
     caption: "cameo ft. Julia",
     locked: true,
     location: "Tauranga Domain",
-    lat: -37.6878,
-    lng: 176.1651
+    lat: -37.6784,
+    lng: 176.1656
   },
   {
     file: "/photos/BBALL25-1.JPG",
@@ -39,8 +39,8 @@ const photos = [
     caption: "cameo ft. Mason",
     locked: true,
     location: "Mercury Baypark",
-    lat: -37.7136,
-    lng: 176.1778
+    lat: -37.6863,
+    lng: 176.2251
   },
   {
     file: "/photos/MIS25-1.JPG",
@@ -59,8 +59,8 @@ const photos = [
     caption: "up Mount Hikurangi in Gisborne",
     locked: false,
     location: "Mount Hikurangi",
-    lat: -38.1833,
-    lng: 178.0667
+    lat: -37.9189,
+    lng: 178.0607
   },
   {
     file: "/photos/MIS25-3.JPG",
