@@ -113,7 +113,7 @@ window.COURSE = {
     {
       heading: 'Check what you know',
       blocks: [
-        { type: 'text', html: 'Five questions. Get one right first time to earn its points.' },
+        { type: 'text', html: 'Five questions. Get each one right first time to earn its points.' },
         { type: 'quiz', questions: [
           { q: 'What\'s the most common injury from manual handling?', options: ['Cuts to the hands', 'Lower back pain and injury', 'Broken toes'], answer: 1, feedback: 'Lower back injuries are the most common result.' },
           { q: 'What should you try first?', options: ['Lift carefully with good technique', 'Find a way to do the job without lifting', 'Ask for a back brace'], answer: 1, feedback: 'Remove the risk first. Technique comes last.' },
