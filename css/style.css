@@ -822,3 +822,17 @@ body, main, section, .card, .button, nav, footer {
   section { opacity: 1; transform: none; animation: none; }
   .card { transition: border-color 0.2s ease; }
 }
+
+/* Plain HTML additions */
+.hero-sub { color: var(--text-muted, #888); font-size: 1.1rem; margin-top: 0.5rem; }
+.hero-sub a { color: inherit; }
+.pin-label .icon-lock { vertical-align: -2px; margin-right: 4px; }
+.lightbox-close svg { display: block; margin: auto; }
+
+/* Cards are links; no underline */
+a.card { text-decoration: none; }
+
+/* Map tiles are OpenStreetMap (no API key); darken them in dark mode */
+:root:not([data-theme="light"]) .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.6);
+}

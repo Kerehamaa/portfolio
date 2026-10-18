@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio | Kerehama Andrews</title>
+  <meta name="description" content="Websites, awards, and photography by Kerehama Andrews, Lead Developer at Kitset Labs." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script>try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); } catch (e) {}</script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/site.js" defer></script>
+  <script src="/js/photos.js" defer></script>
+</head>
+<body>
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <nav>
+    <a href="https://kerehama.nz" class="brand">kerehama.nz</a>
+    <div class="nav-controls">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <div class="theme-icon">
+          <div class="sun-icon">
+            <div class="sun-center"></div>
+            <div class="sun-rays">
+              <div class="ray" style="--i: 0"></div>
+              <div class="ray" style="--i: 1"></div>
+              <div class="ray" style="--i: 2"></div>
+              <div class="ray" style="--i: 3"></div>
+              <div class="ray" style="--i: 4"></div>
+              <div class="ray" style="--i: 5"></div>
+              <div class="ray" style="--i: 6"></div>
+              <div class="ray" style="--i: 7"></div>
+            </div>
+          </div>
+          <div class="moon-icon">
+            <div class="moon-shape"></div>
+          </div>
+        </div>
+      </button>
+      <div class="starmap-wrapper">
+        <button class="starmap-toggle" aria-expanded="false" aria-controls="starmap-panel" aria-label="Site map">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>
+            <line x1="6" y1="6" x2="18" y2="6"/><line x1="6" y1="6" x2="12" y2="18"/><line x1="18" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <div class="starmap" id="starmap-panel" aria-label="Site map">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Lines from portfolio hub to subdomains (top row) -->
+            <line x1="150" y1="80" x2="50" y2="30" class="starmap-line" />
+            <line x1="150" y1="80" x2="150" y2="30" class="starmap-line" />
+            <line x1="150" y1="80" x2="250" y2="30" class="starmap-line" />
+
+            <!-- Lines from portfolio hub to sections (bottom row) -->
+            <line x1="150" y1="80" x2="50" y2="140" class="starmap-line" />
+            <line x1="150" y1="80" x2="150" y2="140" class="starmap-line" />
+            <line x1="150" y1="80" x2="250" y2="140" class="starmap-line" />
+
+            <!-- Top row: subdomains -->
+            <a href="https://kerehama.nz" target="_blank" rel="noopener noreferrer">
+              <circle cx="50" cy="30" r="6" class="starmap-dot" />
+              <text x="50" y="18" class="starmap-label">kerehama.nz</text>
+            </a>
+            <a href="https://kitsetlabs.nz" target="_blank" rel="noopener noreferrer">
+              <circle cx="150" cy="30" r="6" class="starmap-dot" />
+              <text x="150" y="18" class="starmap-label">kitset</text>
+            </a>
+            <a href="https://reo.kerehama.nz" target="_blank" rel="noopener noreferrer">
+              <circle cx="250" cy="30" r="6" class="starmap-dot" />
+              <text x="250" y="18" class="starmap-label">reo</text>
+            </a>
+
+            <!-- Center: portfolio home -->
+            <a href="#">
+              <circle cx="150" cy="80" r="9" class="starmap-dot starmap-home" />
+              <text x="150" y="68" class="starmap-label starmap-label-home">portfolio</text>
+            </a>
+
+            <!-- Bottom row: page sections -->
+            <a href="#websites">
+              <circle cx="50" cy="140" r="5" class="starmap-dot" />
+              <text x="50" y="158" class="starmap-label">websites</text>
+            </a>
+            <a href="#awards">
+              <circle cx="150" cy="140" r="5" class="starmap-dot" />
+              <text x="150" y="158" class="starmap-label">awards</text>
+            </a>
+            <a href="#photos">
+              <circle cx="250" cy="140" r="5" class="starmap-dot" />
+              <text x="250" y="158" class="starmap-label">photos</text>
+            </a>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Kerehama Andrews</p>
+        <h1>Portfolio</h1>
+        <p class="hero-sub">Lead Developer at <a href="https://kitsetlabs.nz">Kitset Labs</a>. Websites, awards and photos.</p>
+      </div>
+      <div class="cta-row">
+        <a class="button secondary" href="#websites">Websites</a>
+        <a class="button secondary" href="#awards">Awards</a>
+        <a class="button secondary" href="#photos">Photos</a>
+      </div>
+    </section>
+
+    <section id="websites">
+      <header>
+        <p class="label">Websites</p>
+        <h2>Things I've built</h2>
+      </header>
+      <div class="card-grid two">
+        <a class="card" href="https://kitsetlabs.nz" target="_blank" rel="noopener noreferrer">
+          <span class="label">My business</span>
+          <h3>kitsetlabs.nz</h3>
+          <p>Kitset Labs, the website builder I run for New Zealand small businesses. I build the platform, the editor and the kits.</p>
+        </a>
+        <a class="card" href="https://temaruomauao.basketball" target="_blank" rel="noopener noreferrer">
+          <span class="label">Basketball</span>
+          <h3>temaruomauao.basketball</h3>
+          <p>Te Maru o Mauao, the Tauranga Māori Basketball Association. Redesigned and run on Kitset.</p>
+        </a>
+        <a class="card" href="https://myspeech.co.nz" target="_blank" rel="noopener noreferrer">
+          <span class="label">Client</span>
+          <h3>myspeech.co.nz</h3>
+          <p>MySpeech, speech-language therapy in Tauranga. Built on Kitset.</p>
+        </a>
+        <a class="card" href="https://skinmantle.co.nz" target="_blank" rel="noopener noreferrer">
+          <span class="label">Client</span>
+          <h3>skinmantle.co.nz</h3>
+          <p>Skin Mantle, corneotherapy facials in Auckland. Built on Kitset.</p>
+        </a>
+        <a class="card" href="https://sim-on.co" target="_blank" rel="noopener noreferrer">
+          <span class="label">Client</span>
+          <h3>sim-on.co</h3>
+          <p>SIM-ON Entertainment, mobile golf simulator hire in Auckland. Built on Kitset.</p>
+        </a>
+        <a class="card" href="https://reo.kerehama.nz" target="_blank" rel="noopener noreferrer">
+          <span class="label">Project</span>
+          <h3>reo.kerehama.nz</h3>
+          <p>An English and te reo Māori translator.</p>
+        </a>
+        <a class="card" href="https://john.kerehama.nz" target="_blank" rel="noopener noreferrer">
+          <span class="label">School</span>
+          <h3>john.kerehama.nz</h3>
+          <p>Road Trip Through John, a school project on the Gospel of John.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="awards">
+      <header>
+        <p class="label">Awards</p>
+        <h2>Recognition &amp; achievements</h2>
+      </header>
+      <div class="card-grid">
+        <div class="card">
+          <h3>SVA Service Award</h3>
+          <span class="label">Student Volunteer Army · Bethlehem College</span>
+          <p>Recognised for sustained commitment to volunteering through the generous contribution of time and effort, freely given without expectation of reward, in service to others and the wider community.</p>
+          <div class="award-meta">
+            <span class="award-tag">Aug 2024 to Jun 2025</span>
+            <span class="award-tag">Volunteering</span>
+            <span class="award-tag">Community Service</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="photos">
+      <header>
+        <p class="label">Photos</p>
+        <h2>Through the lens</h2>
+      </header>
+      <div class="photo-map-container">
+        <div id="photo-map"></div>
+      </div>
+
+      <div class="pin-bar" id="pin-bar">
+        <span class="pin-label"><svg class="icon-lock" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Some photos are private</span>
+        <div class="pin-input-row">
+          <input type="password" id="pin-input" maxlength="4" placeholder="Enter PIN" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="PIN" />
+          <button class="button secondary pin-btn" id="pin-submit">Unlock</button>
+        </div>
+        <span class="pin-error" id="pin-error"></span>
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+      <p class="camera-note">All images shot on Canon EOS M50 Mark II</p>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button class="lightbox-nav prev" aria-label="Previous">‹</button>
+      <img src="" alt="" />
+      <button class="lightbox-nav next" aria-label="Next">›</button>
+      <div class="lightbox-info">
+        <div class="photo-title"></div>
+        <div class="photo-caption"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year">2026</span> Kerehama Andrews
+  </footer>
+</body>
+</html>
