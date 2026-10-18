@@ -196,11 +196,25 @@ const photos = [
       attributionControl: true,
     }).setView([-37.9, 177.0], 8);
 
-    // OpenStreetMap tiles need no API key. Dark mode darkens them with CSS (see .leaflet-tile-pane in style.css).
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 18,
-    }).addTo(map);
+    // Esri Canvas tiles: free, no API key. Dark or light set follows the theme toggle.
+    const esri = (name) => L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/' + name + '/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri',
+      maxZoom: 16,
+    });
+    const tiles = {
+      dark: L.layerGroup([esri('World_Dark_Gray_Base'), esri('World_Dark_Gray_Reference')]),
+      light: L.layerGroup([esri('World_Light_Gray_Base'), esri('World_Light_Gray_Reference')]),
+    };
+    const theme = () => (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+    let current = theme();
+    tiles[current].addTo(map);
+    new MutationObserver(() => {
+      const next = theme();
+      if (next === current) return;
+      map.removeLayer(tiles[current]);
+      tiles[next].addTo(map);
+      current = next;
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     // Group photos by location to avoid stacking markers
     const locations = {};

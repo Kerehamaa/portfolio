@@ -831,8 +831,3 @@ body, main, section, .card, .button, nav, footer {
 
 /* Cards are links; no underline */
 a.card { text-decoration: none; }
-
-/* Map tiles are OpenStreetMap (no API key); darken them in dark mode */
-:root:not([data-theme="light"]) .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.6);
-}
