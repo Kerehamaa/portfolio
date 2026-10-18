@@ -48,9 +48,9 @@ const photos = [
     event: "Missions Trip 2025",
     caption: "on the east coast of New Zealand North Island",
     locked: false,
-    location: "East Coast, NZ",
-    lat: -37.95,
-    lng: 177.3
+    location: "Bay of Plenty coast, drive home",
+    lat: -38.0086,
+    lng: 177.2871
   },
   {
     file: "/photos/MIS25-2.JPG",
@@ -68,9 +68,9 @@ const photos = [
     event: "Missions Trip 2025",
     caption: "taken on the east coast of New Zealand North Island",
     locked: false,
-    location: "East Coast, NZ",
-    lat: -37.85,
-    lng: 177.15
+    location: "Bay of Plenty coast, drive home",
+    lat: -38.0086,
+    lng: 177.2871
   }
 ];
 
