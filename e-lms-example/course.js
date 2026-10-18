@@ -285,6 +285,7 @@
       <h2 style="font-size:1.15rem;font-weight:800;margin:0 0 8px">Remember</h2>
       ${ListBlock({ items: C.summary })}
       <div class="callout note">${ICON.info}<div><h2>Sample course</h2><p>This was a sample made for a portfolio, not accredited training. Your workplace's own training and procedures always come first.</p></div></div>
+      <p><a href="case-study.html">Read how this course was made</a></p>
       ${Sources(['W1', 'W2', 'ACC'])}`;
   }
 

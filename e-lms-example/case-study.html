@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case study | Move safely e-learning course</title>
+  <meta name="description" content="How Kerehama Andrews planned, scripted, designed, built and tested a sample e-learning course on safe moving and handling." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" />
+  <link rel="stylesheet" href="course.css" />
+  <style>
+    .screen h2 { font-size: 1.25rem; font-weight: 800; margin: 26px 0 8px; color: var(--q-900); }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 0 0 8px; }
+    .fact { background: var(--q-50); border-radius: 12px; padding: 10px 12px; }
+    .fact b { display: block; font-size: 1.2rem; font-weight: 800; color: var(--q-600); }
+    .fact span { font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+    .flow { list-style: none; padding: 0; margin: 0 0 8px; }
+    .flow li { border-left: 4px solid var(--q-200); padding: 2px 0 10px 14px; margin: 0; }
+    .flow strong { display: block; font-weight: 800; color: var(--q-800); }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the case study</a>
+
+  <header class="top">
+    <div class="top-row">
+      <a class="course-name" href="./">Move safely</a>
+      <span class="points">Case study</span>
+    </div>
+  </header>
+
+  <main class="screen" id="main">
+    <span class="level-tag">Case study</span>
+    <h1>Building a sample e-learning course</h1>
+
+    <p>Move safely is a 10-minute course on safe moving and handling for new support workers in New Zealand. I made it to show how I plan, script, design, build and test e-learning.</p>
+
+    <div class="facts">
+      <div class="fact"><b>8</b><span>levels</span></div>
+      <div class="fact"><b>10 min</b><span>to complete</span></div>
+      <div class="fact"><b>100</b><span>Lighthouse accessibility</span></div>
+      <div class="fact"><b>0</b><span>frameworks</span></div>
+    </div>
+
+    <p><a class="btn primary" style="width:100%;margin-top:8px" href="./">Try the course</a></p>
+
+    <h2>Who it's for</h2>
+    <p>New support workers in aged care and disability support. They move objects and people every shift, often in a hurry, and usually learn on a phone between tasks. So the course is short, works on a phone first, and puts one idea on each screen.</p>
+
+    <h2>The process</h2>
+    <ol class="flow">
+      <li><strong>Plan</strong>I chose the topic and an eight-level outline: why it matters, spotting risks, removing the lift, moving objects, moving people, a scenario and a quiz.</li>
+      <li><strong>Script</strong>Every screen was written before any design. Each fact is tagged to its source, WorkSafe's manual handling pages or a page of ACC's Moving and Handling People guidelines, and checked against it.</li>
+      <li><strong>Design</strong>I compared seven looks on the same lesson screen and picked a "quest" style, with levels, points and chunky buttons, to keep a dry safety topic moving.</li>
+      <li><strong>Build</strong>One screen template reused for every level, with reusable parts: progress bar, back and next buttons, flip cards, a branching scenario and a quiz. All the words live in one data file, so the same template could run a different course.</li>
+      <li><strong>Test</strong>The whole course was run through with only the keyboard, at phone size, with wrong answers picked on purpose, and checked with Lighthouse.</li>
+    </ol>
+
+    <h2>Decisions I made</h2>
+    <ul>
+      <li><strong>No TILE.</strong> Many manual handling courses teach the TILE checklist, but it comes from UK guidance. WorkSafe New Zealand groups risks into five kinds instead, so the course teaches those.</li>
+      <li><strong>Checked sources, not memory.</strong> Research turned up that one WorkSafe guide on moving people in healthcare has been withdrawn, so the course doesn't rely on it.</li>
+      <li><strong>Gates, not walls.</strong> Learners can't skip ahead, but each gate says exactly what unlocks it ("Flip all five cards").</li>
+      <li><strong>Points for getting it right first time.</strong> Quiz answers lock after one try, and the scenario bonus only counts on the first pick, so the score means something.</li>
+      <li><strong>Accessible by default.</strong> Real buttons for every interaction, a strong focus outline, spoken feedback for screen readers, and motion turned off for people who ask their device for less.</li>
+    </ul>
+
+    <h2>Tools, and how I used AI</h2>
+    <p>Plain HTML, CSS and JavaScript, hosted on Netlify. I worked with an AI assistant (Claude). I made the calls on topic, outline, look and every change, and the AI drafted the script and code from my direction. Every fact was checked against the WorkSafe and ACC sources listed on each screen, and I reviewed the result before it went live.</p>
+
+    <h2>What I'd improve next</h2>
+    <ul>
+      <li>Package it as SCORM so it can run inside an LMS like Moodle and report scores back.</li>
+      <li>Add audio narration and real photos of equipment such as hoists and slide sheets.</li>
+      <li>Test it with a few real support workers and rewrite anything they stumble on.</li>
+    </ul>
+
+    <div class="callout note">
+      <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div><h2 style="margin:0 0 4px;font-size:1.05rem">Sample only</h2><p>Move safely is a portfolio piece, not accredited training.</p></div>
+    </div>
+  </main>
+
+  <nav class="section-nav" aria-label="Case study links">
+    <a class="btn secondary" href="https://portfolio.kerehama.nz">Portfolio</a>
+    <a class="btn primary" href="./">Try the course</a>
+  </nav>
+
+  <footer class="foot">
+    By <a href="https://portfolio.kerehama.nz">Kerehama Andrews</a>, Lead Developer at <a href="https://kitsetlabs.nz">Kitset Labs</a>.
+  </footer>
+</body>
+</html>
