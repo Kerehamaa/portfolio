@@ -1,7 +1,9 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <path d="M18 48V16" stroke="#F8F7F2" stroke-width="4" stroke-linecap="round" />
-  <path d="M18 32L34 16" stroke="#F8F7F2" stroke-width="4" stroke-linecap="round" />
-  <path d="M18 32L34 48" stroke="#F8F7F2" stroke-width="4" stroke-linecap="round" />
-  <path d="M34 48L46 16L54 48" stroke="#F8F7F2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M34 40H52" stroke="#F97316" stroke-width="4" stroke-linecap="round" />
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0D0E10"/>
+  <path d="M32 32L14 18M32 32L50 16M32 32L48 48M32 32L16 46" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="14" cy="18" r="5" fill="#06b6d4"/>
+  <circle cx="50" cy="16" r="5" fill="#06b6d4"/>
+  <circle cx="48" cy="48" r="5" fill="#06b6d4"/>
+  <circle cx="16" cy="46" r="5" fill="#06b6d4"/>
+  <circle cx="32" cy="32" r="8" fill="#FFFFFF"/>
 </svg>
